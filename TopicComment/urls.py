@@ -1,5 +1,5 @@
 from django.urls import path
-# from .views import home
+from .views import all_topic
 urlpatterns = [
-    # path('',home,name='home'),
+    path('',all_topic,name='all_topic'),
 ]

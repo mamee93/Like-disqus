@@ -1,0 +1,9 @@
+ {% extends 'main.html' %}
+ {% load static %}
+
+{% block content %}
+{% for topic in all_topic %}
+<h5> {{topic.user}} upvoted you on <strong>{{topic.topc_title}}</strong> in  {{topic.created_at}}</h5>
+<br>
+{% endfor %}
+{% endblock %}
