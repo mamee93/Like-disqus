@@ -14,24 +14,13 @@
                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
                   </div>
                   <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
- <form action="{% url 'TopicComment:like_topic'  %}" method="POST">
-  {% csrf_token %}
-   <input type="hidden" name="topic_id" value="{{topc_title.id}}">
-  {% if user not in topc_title.like.all %}
-  <button type="submit">Like</button>
-{% else %}
-<button type="submit">UnLike</button>
-
-  {% endif %}
-
- </form>
- <strong>{{topc_title.like.all.count}} Likes</strong>
-                {#  <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+ 
+              <!-- <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
  
 
                   
                   <a target="_blank" rel="nofollow" href=" "> <i class="fa fa-thumbs" aria-hidden="true"></i> </a>
-                 #}
+              -->
                 </div>
               </div>
 

@@ -21,9 +21,10 @@
   {% csrf_token %}
    <input type="hidden" name="topic_id" value="{{topic.id}}">
   {% if user not in topic.like.all %}
-  <button type="submit">Like</button>
+  
+<button type="submit"><a href=""> <i class="fa fa-thumbs-up" aria-hidden="true"></i></a></button>
 {% else %}
-<button type="submit">UnLike</button>
+<button type="submit"><a href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a></button>
 
   {% endif %}
 
