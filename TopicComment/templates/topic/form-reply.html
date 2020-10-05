@@ -1,0 +1,13 @@
+<div class="comment-box add-comment">
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+            
+          <span class="commenter-name">
+             {% buttons %}
+            <button type="submit" class="btn btn-default">Comment</button> {% endbuttons %}
+          </span>
+        </form>
+
+        
+        </div>

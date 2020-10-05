@@ -15,11 +15,11 @@
                   </div>
                   <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
 {% if request.user in topc_title.like.all %}
-                 <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                 <a target="_blank" rel="nofollow" href="{% url 'TopicComment:like' topc_title.id %}"> <i class="fa fa-thumbs-down" aria-hidden="true"></i>D</a>
 {% else %}
 
                   
-                  <a target="_blank" rel="nofollow" href="{% url 'TopicComment:like' topc_title.id %}"> <i class="fa fa-heart" aria-hidden="true"></i> </a>
+                  <a target="_blank" rel="nofollow" href="{% url 'TopicComment:like' topc_title.id %}"> <i class="fa fa-heart" aria-hidden="true"></i>l </a>
                 {% endif %}
                 </div>
               </div>
@@ -50,7 +50,7 @@
         {% for comments in comments %}
         <div class="comment-box">
           <span class="commenter-pic">
-            <img src="/images/user-icon.jpg" class="img-fluid">
+            <img src="{{ userComment.image.url }}" class="img-fluid">
           </span>
           <span class="commenter-name">
             <a href="#">{{comments.userComment}}</a> <span class="comment-time">{{comments.created_at}}</span>
@@ -59,7 +59,27 @@
           <div class="comment-meta">
             <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</button>
             <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> DisLike</button> 
-            <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>         
+           <div class="comment-box add-comment">
+        
+
+        
+        </div>
+      
+
+ <div class="comment-box add-comment">
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+            
+          <span class="commenter-name">
+             {% buttons %}
+            <button type="submit" class="btn btn-default">Comment</button> {% endbuttons %}
+          </span>
+        </form>
+
+        
+        </div>
+            <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> {{comments.reply}}reply </button>         
           </div>
           <div class="comment-box add-comment reply-box">
             <span class="commenter-pic">

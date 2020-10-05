@@ -19,6 +19,7 @@ class Comments(models.Model):
 	topc_title  = models.ForeignKey('Topic', related_name='Comments_Topic', on_delete=models.CASCADE  )
 	comments    = models.TextField(max_length=100)
 	created_at  = models.DateTimeField(default=timezone.now)
+	reply       = models.ForeignKey('self',related_name='replyies',null=True, on_delete=models.CASCADE)
 	update_at   = models.DateTimeField(auto_now_add=True)
 	# image      = models.ImageField(upload_to='CommintImg/')
 

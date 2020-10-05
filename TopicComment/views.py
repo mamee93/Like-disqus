@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Topic,Comments
-from .forms import CommentForm
+from .forms import CommentForm,ReplyForm
 from django.urls import reverse
 # Create your views here.
 
@@ -17,6 +17,8 @@ def topic_details(request,id):
 	total_comments = comments.count()
 	if request.method == 'POST':
 		form = CommentForm(request.POST)
+		form = ReplyForm(request.POST)
+
 		if form.is_valid():
 			myform = form.save(commit=False)
 			myform.userComment = request.user
@@ -25,6 +27,7 @@ def topic_details(request,id):
 
 	else:
 		form = CommentForm()
+		form = ReplyForm()
 
 
 	return render(request,'topic/topic_details.html',{'topc_title':topc_title,'comments':comments,'form':form,'total_comments':total_comments})
