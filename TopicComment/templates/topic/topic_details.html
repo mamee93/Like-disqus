@@ -14,9 +14,13 @@
                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
                   </div>
                   <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+{% if request.user in topc_title.like.all %}
+                 <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+{% else %}
 
-                  <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </a>|<a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-                 
+                  
+                  <a target="_blank" rel="nofollow" href="{% url 'TopicComment:like' topc_title.id %}"> <i class="fa fa-heart" aria-hidden="true"></i> </a>
+                {% endif %}
                 </div>
               </div>
 

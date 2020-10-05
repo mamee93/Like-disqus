@@ -29,4 +29,13 @@ def topic_details(request,id):
 
 	return render(request,'topic/topic_details.html',{'topc_title':topc_title,'comments':comments,'form':form,'total_comments':total_comments})
  
- 
+def like_or_unlike(request,id):
+	topc_title = Topic.objects.get(id=id)
+ 	 
+	if request.user in topc_title.like.all():
+		topc_title.like.remove(request.user)
+
+	else:
+		topc_title.like.add(request.user)
+
+	return redirect(reverse('TopicComment:topic_details',kwargs={'id':topc_title.id}))  

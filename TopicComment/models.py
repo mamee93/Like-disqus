@@ -8,7 +8,7 @@ class Topic(models.Model):
 	topc_title = models.CharField(max_length=100)
 	created_at = models.DateTimeField(auto_now=True) 
 	update_at  = models.DateTimeField(auto_now_add=True)
-	likes      = models.ManyToManyField(User,blank=True,null=True)
+	like      = models.ManyToManyField(User,blank=True)
 	# comments   = models.ForeignKey('comments', related_name='Comments:', on_delete=models.CASCADE  )
 	def __str__(self):
 		return self.topc_title
