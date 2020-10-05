@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+ {% load static %}
+{% load bootstrap4 %} 
+{% block content %}
+ 
+ <div class="col-lg-6 mb-4">
+
+              <div class="card shadow mb-4 ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"> {{topic.user}} upvoted you on <a href=""><strong>{{topc_title.topc_title}}</strong></a> in   {{topc_title.created_at}} </h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                  </div>
+                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+
+                  <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </a>|<a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                 
+                </div>
+              </div>
+
+              <!-- Approach -->
+             <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="comments">
+        <div class="comments-details">
+          <span class="total-comments comments-sort">{{total_comments}} Comments</span>
+
+                
+        </div>
+        <div class="comment-box add-comment">
+        <form method="POST" action="" enctype="multipart/form-data">
+        	{% csrf_token %}
+        	{% bootstrap_form form %}
+          	
+          <span class="commenter-name">
+             {% buttons %}
+            <button type="submit" class="btn btn-default">Comment</button> {% endbuttons %}
+          </span>
+        </form>
+
+        
+        </div>
+        {% for comments in comments %}
+        <div class="comment-box">
+          <span class="commenter-pic">
+            <img src="/images/user-icon.jpg" class="img-fluid">
+          </span>
+          <span class="commenter-name">
+            <a href="#">{{comments.userComment}}</a> <span class="comment-time">{{comments.created_at}}</span>
+          </span>       
+          <p class="comment-txt more">{{comments.comments}}.</p>
+          <div class="comment-meta">
+            <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</button>
+            <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> DisLike</button> 
+            <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>         
+          </div>
+          <div class="comment-box add-comment reply-box">
+            <span class="commenter-pic">
+              <img src="/images/user-icon.jpg" class="img-fluid">
+            </span>
+            <span class="commenter-name">
+              <input type="text" placeholder="Add a public reply" name="Add Comment">
+              <button type="submit" class="btn btn-default">Reply</button>
+              <button type="cancel" class="btn btn-default reply-popup">Cancel</button>
+            </span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+ 
+
+{% endblock %}

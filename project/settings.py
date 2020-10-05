@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TopicComment',
+    
+    
+    "bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -99,6 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+ 
+LOGIN_REDIRECT_URL = 'all_topic'
+LOGOUT_REDIRECT_URL = 'all_topic'
 
 
 # Internationalization
