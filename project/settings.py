@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TopicComment',
+    'home',
     
     
     "bootstrap4",
@@ -104,8 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
  
-LOGIN_REDIRECT_URL = 'all_topic'
-LOGOUT_REDIRECT_URL = 'all_topic'
+LOGIN_REDIRECT_URL = 'accounts:profile'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 
 # Internationalization

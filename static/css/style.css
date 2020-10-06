@@ -1,0 +1,10 @@
+.col-lg-6 {
+	    margin: 20px auto;
+}
+
+.form1 button{
+	border-radius: 2px solid transparent;
+	border: none;
+	padding: 5px;
+	width: 100px;
+}

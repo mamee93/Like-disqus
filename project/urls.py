@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('', include('TopicComment.urls',namespace='TopicComment')),
+    path('', include('home.urls',namespace='home')),
      
 ]
 urlpatterns  += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

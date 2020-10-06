@@ -5,8 +5,9 @@ from django.urls import reverse
 # Create your views here.
 
 def all_topic(request):
+	user = request.user
 
-	all_topic = Topic.objects.all()
+	all_topic = Topic.objects.filter(user=user)
 	return render(request,'topic/topic.html',{'all_topic':all_topic})
 
 
