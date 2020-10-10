@@ -95,9 +95,9 @@
                 <div class="card-body">
 
                   <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ profile.image.url }}" alt="">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ profile.image_url|default_if_none:'#' }}" alt="">
                   </div>
-                  <p>{{profile}} |<a href="{% url 'accounts:profile_edit' %}" class="btn  active" role="button" aria-pressed="true">Edit Profile</a><a target="_blank" rel="nofollow" href="https://undraw.co/"></p></a>
+                  <p>{{profile}} |<a href="{% url 'accounts:profile_edit' profile.slug %}" class="btn  active" role="button" aria-pressed="true">Edit Profile</a><a target="_blank" rel="nofollow" href="https://undraw.co/"></p></a>
 
             
                   <a target="_blank" rel="nofollow" href="https://undraw.co/">Create at {{profile.created_at}}</a>

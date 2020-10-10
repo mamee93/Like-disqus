@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from  .forms import SignUpForm ,UserEditForm,ProfileEditForm
 from .models import  Profile
  
@@ -16,8 +16,9 @@ def signup(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-
-            return redirect('login')
+            login(request,user)
+            
+            return redirect('profile')
 
     else:
         form = SignUpForm()
@@ -25,14 +26,18 @@ def signup(request):
 
 
 
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
+def profile(request,slug):
+    user = request.user
+     
+    profile = Profile.objects.filter(user=request.user,slug=slug)
+   
     
     return render(request,'accounts/profile.html',{'profile':profile})
 
 
-def profile_edit(request):
-    profile = Profile.objects.get(user=request.user)
+def profile_edit(request,slug):
+    profile = get_object_or_404(Profile,user=request.user,slug=slug)
+    # profile = Profile.objects.get(user=request.user,slug=slug)
     if request.method=='POST':
         userform = UserEditForm(request.POST, instance=request.user)
         profileform = ProfileEditForm(request.POST, instance=profile)

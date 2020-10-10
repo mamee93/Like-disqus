@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'TopicComment',
     'home',
+    'ckeditor',
+    'django_filters',
     
     
     "bootstrap4",
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
  
-LOGIN_REDIRECT_URL = 'accounts:profile'
+LOGIN_REDIRECT_URL = 'TopicComment:all_topic'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
 
@@ -133,3 +135,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+ 

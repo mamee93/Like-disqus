@@ -9,15 +9,30 @@
 {% for topic in all_topic %}
  <div class="col-lg-6 mb-4">
 
-              <div class="card shadow mb-4 ">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"> {{topic.user}} upvoted you on <a href="{% url 'TopicComment:topic_details' topic.id %}"><strong>{{topic.topc_title}}</strong></a> in  {{topic.created_at}} </h6>
-                </div>
-                <div class="card-body">
+     <div class="comment-box">
+          
+          <span class="commenter-pic">
+            <img src="{{  profile.image_url|default_if_none:'#' }}" class="img-fluid">
+          </span>
+          <span class="commenter-name">
+            <a href="#">{{topic.user}}</a> <span class="comment-time">{{topic.created_at}}</span>
+          </span>   
+           <a href="{% url 'TopicComment:topic_details' topic.id %}"><strong>{{topic.topc_title}}</strong></a>    
+          <p class="comment-txt more">{{comments.comments| safe }} .</p>
+          <div class="comment-meta">
+            <div class="card-body">
                   <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ topic.image.url }}" alt="">
                   </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+                 <p>{{topic.content| safe}}</p>>
+            <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
+            <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button> 
+              
+          </div>
+
+        </div>
+
+         
 
 
                    <form class="form1" action="{% url 'TopicComment:like_topic'  %}" method="POST">

@@ -17,7 +17,7 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              <form class="user" method="POST" action="">
+              <form class="user" method="POST" action="" enctype="multipart/form-data">
               	{% csrf_token %}
                 {% bootstrap_form form %}
                   <button type="submit" name="signup" class="btn btn-primary btn-user btn-block"><a href="" >

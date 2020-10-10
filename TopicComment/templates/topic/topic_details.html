@@ -1,91 +1,149 @@
 {% extends 'main.html' %}
- {% load static %}
+{% load static %}
 {% load bootstrap4 %} 
 {% block content %}
  
- <div class="col-lg-6 mb-4">
+<div class="col-lg-6 mb-4">
 
-              <div class="card shadow mb-4 ">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"> {{topic.user}} upvoted you on <a href=""><strong>{{topc_title.topc_title}}</strong></a> in   {{topc_title.created_at}} </h6>
-                </div>
-                <div class="card-body">
+  <div class="card shadow mb-4 ">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary"> {{topic.user}} upvoted you on <a href=""><strong>{{topc_title.topc_title}}</strong></a> in   {{topc_title.created_at}} </h6>
+      </div>
+          <div class="card-body">
                   <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src= "{{ profile.image_url|default_if_none:'#' }}" alt="">
                   </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
- <strong>{{topc_title.like.all.count}} Likes</strong>
-              <!-- <a target="_blank" rel="nofollow" href=""> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
- 
+                  <p>{{topc_title.content| safe}}you can use completely free and without attribution!</p>
+                  <strong>{{topc_title.like.all.count}} Likes</strong>
+             
+         
+          </div>
+  </div>
 
-                  
-                  <a target="_blank" rel="nofollow" href=" "> <i class="fa fa-thumbs" aria-hidden="true"></i> </a>
-              -->
-                </div>
-              </div>
+</div>
+              <!--  End  -->
 
-              <!-- Approach -->
-             <div class="container">
+<!--START COMMENTS REPLY -->
+<!--START COMMENTS REPLY -->
+<!--START COMMENTS REPLY -->
+
+<div class="container">
   <div class="row">
     <div class="col-12">
       <div class="comments">
         <div class="comments-details">
           <span class="total-comments comments-sort">{{total_comments}} Comments</span>
-
-                
+          <span class="dropdown">
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Sort By <span class="caret"></span></button>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">Top Comments</a>
+              <a href="#" class="dropdown-item">Newest First</a>
+              </div>
+          </span>     
         </div>
-        <div class="comment-box add-comment">
+
+        <!--START FORM COMMENTS -->
+{% if user.is_authenticated %}
         <form method="POST" action="" enctype="multipart/form-data">
-        	{% csrf_token %}
-        	{% bootstrap_form form %}
-          	
-          <span class="commenter-name">
-             {% buttons %}
-            <button type="submit" class="btn btn-default">Comment</button> {% endbuttons %}
-          </span>
-        </form>
-
-        
-        </div>
-        {% for comments in comments %}
-        <div class="comment-box">
+                         {% csrf_token %}
+        <div class="comment-box add-comment">
+          
           <span class="commenter-pic">
-            <img src="{{ userComment.image.url }}" class="img-fluid">
+            <img src="{{ profile.image_url|default_if_none:'#' }}" class="img-fluid">
+          </span>
+
+          <span class="commenter-name">
+             <input type="hidden" name="comments_id" value="{{comments.id}}" >
+            <input type="hidden" placeholder="Add a public comment" name="Add Comment">
+            {{ form.media }}
+          {% bootstrap_form form %}
+            <button type="submit" class="btn btn-default">Comment</button>
+           
+          </span>
+        </div>
+
+      </form>
+      {% else %}
+       <span class="total-comments comments-sort"><a href="{% url 'accounts:login' %}" class="dropdown-item">Login To Comments </a></span>
+      {% endif %}
+
+<br>
+<br>
+       <!--END FORM COMMENTS -->
+
+       {% for comments in comments %}
+
+        <div class="comment-box">
+          
+          <span class="commenter-pic">
+            <img src="{{  profile.image_url|default_if_none:'#' }}" class="img-fluid">
           </span>
           <span class="commenter-name">
             <a href="#">{{comments.userComment}}</a> <span class="comment-time">{{comments.created_at}}</span>
           </span>       
-          <p class="comment-txt more">{{comments.comments}}.</p>
+          <p class="comment-txt more">{{comments.comments| safe }} .</p>
           <div class="comment-meta">
-            <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</button>
-            <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> DisLike</button> 
-           <div class="comment-box add-comment">
-        
+            <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
+            <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button> 
+            <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>   
+          </div>
 
-        
+
+
+  <div class="  replied reply-box ">
+      {% for reply in comments.replies.all %}
+              <span class="commenter-pic">
+                <img src="{{user.profile.image.url }}" class="img-fluid">
+              </span>
+              <span class="commenter-name">
+            <a href="#">{{reply.userComment}}</a> <span class="comment-time">{{reply.created_at}}</span>     
+              <p class="comment-txt more">{{reply.comments| safe }}</p>
+              <div class="comment-meta">
+                <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
+                <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button> 
+                <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>         
+              </div>
+          
+
+ {% endfor %}
+
+        <form method="POST" action="" enctype="multipart/form-data">
+                         {% csrf_token %}
+        <div class="comment-box add-comment">
+          
+          <span class="commenter-pic">
+            <img src="{{ profile.image_url|default_if_none:'#' }}" class="img-fluid">
+          </span>
+
+          <span class="commenter-name">
+             <input type="hidden" name="comments_id" value="{{comments.id}}" >
+            <input type="hidden" placeholder="Add a public comment" name="Add Comment">
+            {{ form.media }}
+          {% bootstrap_form form %}
+            <button type="submit" class="btn btn-default">Comment</button>
+          </span>
         </div>
-      
 
- 
-            <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> reply </button>         
+      </form>
+       </span>
           </div>
-          <div class="comment-box add-comment reply-box">
-            <span class="commenter-pic">
-              <img src="/images/user-icon.jpg" class="img-fluid">
-            </span>
-            <span class="commenter-name">
-              <input type="text" placeholder="Add a public reply" name="Add Comment">
-              <button type="submit" class="btn btn-default">Reply</button>
-              <button type="cancel" class="btn btn-default reply-popup">Cancel</button>
-            </span>
-          </div>
+
         </div>
         {% endfor %}
-      </div>
+
+      </div>  <!--here COMMENTS -->
+     
     </div>
   </div>
 </div>
-            </div>
  
 
+<script>
+// Reply box popup JS
+$(document).ready(function(){
+  $(".reply-popup").click(function(){
+    $(".reply-box").toggle();
+  });
+});
+</script>
 {% endblock %}
